@@ -142,7 +142,7 @@ export const QuestionForm = ({
                     : "opacity-0 translate-x-4"
                 }`}
               >
-                <h2 className="text-2xl font-semibold text-gray-900 mt-12">
+                <h2 className="text-2xl font-semibold text-gray-900 mt-8">
                   AI Follow Up Question
                 </h2>
                 <p className="text-gray-600">
