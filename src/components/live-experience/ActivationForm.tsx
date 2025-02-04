@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
 import { CheckCircle2 } from "lucide-react";
+import { useState } from "react";
 
 interface ActivationFormProps {
   onUnlock: () => void;

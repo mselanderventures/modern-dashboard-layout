@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { CheckCircle2, ChevronRight } from "lucide-react";
+import { useState } from "react";
 
 interface Question {
   id: number;

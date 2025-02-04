@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { CheckCircle2, ChevronRight } from "lucide-react";
+import { useState } from "react";
 
 interface BusinessFormProps {
   onSubmit: () => void;
