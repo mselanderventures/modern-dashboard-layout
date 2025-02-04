@@ -15,11 +15,11 @@ export const LiveHeader = ({ businessDetails }: LiveHeaderProps) => {
   return (
     <div className="bg-white border-b">
       <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
+        <div className="mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 tracking-tight">
             Founder's Fortune Academy by Jeremy Schwartz
           </h1>
-          <div className="mt-2 flex items-center text-gray-600 space-x-4">
+          <div className="mt-3 flex items-center text-gray-600 space-x-4">
             <span className="flex items-center">
               <MapPin className="h-4 w-4 mr-1" />
               Miami, Florida
@@ -30,8 +30,8 @@ export const LiveHeader = ({ businessDetails }: LiveHeaderProps) => {
         </div>
 
         {businessDetails && (
-          <>
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">
+          <div className="border-t pt-8">
+            <h2 className="text-xl font-semibold text-gray-800 mb-6">
               {businessDetails.name}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -70,7 +70,7 @@ export const LiveHeader = ({ businessDetails }: LiveHeaderProps) => {
                 </p>
               </div>
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>

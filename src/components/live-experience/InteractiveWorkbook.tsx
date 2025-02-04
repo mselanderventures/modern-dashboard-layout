@@ -35,9 +35,9 @@ export const InteractiveWorkbook = ({
   const currentQuestion = questions.find(q => q.id === currentQuestionId)!;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">Interactive Workbook</h2>
-      <div className="flex gap-8 animate-fade-in">
+    <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 bg-gray-50 mt-8 rounded-t-xl animate-[fade-in_0.5s_ease-out,slide-in-bottom_0.5s_ease-out] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+      <h2 className="text-2xl font-bold text-gray-900 mb-8">Interactive Workbook</h2>
+      <div className="flex gap-8">
         <QuestionSidebar
           questions={questions}
           currentQuestionId={currentQuestionId}
