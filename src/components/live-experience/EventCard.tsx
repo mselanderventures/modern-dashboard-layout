@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Monitor, MapPin } from "lucide-react";
 import { useState } from "react";
 
 interface EventCardProps {
@@ -8,6 +9,7 @@ interface EventCardProps {
   country: string;
   date: string;
   isActive?: boolean;
+  isVirtual?: boolean;
   onRegister: () => void;
   onJoin?: (code: string) => void;
 }
@@ -17,6 +19,7 @@ export const EventCard = ({
   country,
   date,
   isActive,
+  isVirtual,
   onRegister,
   onJoin,
 }: EventCardProps) => {
@@ -36,14 +39,25 @@ export const EventCard = ({
   };
 
   return (
-    <Card className="w-full overflow-hidden group transition-all duration-300 hover:shadow-lg border-2 hover:border-purple-200">
-      <div className="relative h-32 bg-gradient-to-br from-purple-500/10 to-blue-500/10">
+    <Card className={`w-full overflow-hidden group transition-all duration-300 hover:shadow-lg border-2 ${isActive ? 'hover:border-purple-300' : 'hover:border-purple-200'}`}>
+      <div className={`relative h-32 ${
+        isVirtual 
+          ? 'bg-gradient-to-br from-blue-500/10 to-purple-500/10'
+          : 'bg-gradient-to-br from-purple-500/10 to-blue-500/10'
+      }`}>
         <div className="absolute inset-0 bg-white/40 backdrop-blur-sm" />
         <CardHeader className="relative">
-          <CardTitle className="text-xl font-semibold">
-            {city}, {country}
-          </CardTitle>
-          <p className="text-muted-foreground font-medium">{date}</p>
+          <div className="flex items-center gap-2">
+            {isVirtual ? (
+              <Monitor className="h-5 w-5 text-purple-500" />
+            ) : (
+              <MapPin className="h-5 w-5 text-purple-500" />
+            )}
+            <CardTitle className="text-xl font-semibold">
+              {city}, {country}
+            </CardTitle>
+          </div>
+          <p className="text-muted-foreground font-medium mt-2">{date}</p>
         </CardHeader>
       </div>
       <CardContent className="pt-4">
@@ -71,7 +85,9 @@ export const EventCard = ({
           <Button 
             onClick={onRegister} 
             variant="outline" 
-            className="w-full hover:bg-purple-50 transition-all duration-300"
+            className={`w-full hover:bg-purple-50 transition-all duration-300 ${
+              isVirtual ? 'border-blue-200 hover:border-blue-300' : 'border-purple-200 hover:border-purple-300'
+            }`}
           >
             Register
           </Button>
