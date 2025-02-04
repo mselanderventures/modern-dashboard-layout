@@ -8,6 +8,7 @@ interface EventCardProps {
   city: string;
   country: string;
   date: string;
+  image?: string;
   isActive?: boolean;
   isVirtual?: boolean;
   onRegister: () => void;
@@ -18,6 +19,7 @@ export const EventCard = ({
   city,
   country,
   date,
+  image,
   isActive,
   isVirtual,
   onRegister,
@@ -40,27 +42,38 @@ export const EventCard = ({
 
   return (
     <Card className={`w-full overflow-hidden group transition-all duration-300 hover:shadow-lg border-2 ${isActive ? 'hover:border-purple-300' : 'hover:border-purple-200'}`}>
-      <div className={`relative h-32 ${
-        isVirtual 
-          ? 'bg-gradient-to-br from-blue-500/10 to-purple-500/10'
-          : 'bg-gradient-to-br from-purple-500/10 to-blue-500/10'
-      }`}>
-        <div className="absolute inset-0 bg-white/40 backdrop-blur-sm" />
-        <CardHeader className="relative">
-          <div className="flex items-center gap-2">
-            {isVirtual ? (
-              <Monitor className="h-5 w-5 text-purple-500" />
-            ) : (
-              <MapPin className="h-5 w-5 text-purple-500" />
-            )}
-            <CardTitle className="text-xl font-semibold">
-              {city}, {country}
-            </CardTitle>
-          </div>
-          <p className="text-muted-foreground font-medium mt-2">{date}</p>
-        </CardHeader>
-      </div>
-      <CardContent className="pt-4">
+      {image ? (
+        <div className="relative h-48">
+          <img 
+            src={image} 
+            alt={`${city} Event`}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20" />
+        </div>
+      ) : (
+        <div className={`h-32 ${
+          isVirtual 
+            ? 'bg-gradient-to-br from-blue-500/10 to-purple-500/10'
+            : 'bg-gradient-to-br from-purple-500/10 to-blue-500/10'
+        }`}>
+          <div className="absolute inset-0 bg-white/40 backdrop-blur-sm" />
+        </div>
+      )}
+      <CardHeader className="relative">
+        <div className="flex items-center gap-2">
+          {isVirtual ? (
+            <Monitor className="h-5 w-5 text-purple-500" />
+          ) : (
+            <MapPin className="h-5 w-5 text-purple-500" />
+          )}
+          <CardTitle className="text-xl font-semibold">
+            {city}, {country}
+          </CardTitle>
+        </div>
+        <p className="text-muted-foreground font-medium">{date}</p>
+      </CardHeader>
+      <CardContent className="pt-2">
         {isActive && showActivation && (
           <div className="space-y-3 animate-in fade-in slide-in-from-top-2 duration-300">
             <Input
