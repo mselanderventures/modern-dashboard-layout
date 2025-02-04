@@ -9,26 +9,30 @@ interface Question {
   text: string;
   answer: string;
   isCompleted: boolean;
+  followUpAnswer?: string;
+  showFollowUp?: boolean;
 }
 
 const initialQuestions: Question[] = [
   {
     id: 1,
-    text: "\"I Wish\" statements that describe where you wish you were with your business. What are some \"I Wish\" statements related to the number of customers that you have?",
+    text: "I Wish... #1: What are some \"I Wish\" statements related to the number of customers that you have?",
     answer: "",
     isCompleted: false,
   },
   {
     id: 2,
-    text: "What are some \"I wish\" statements related to your P&L statement?",
+    text: "I Wish... #2: What are some \"I wish\" statements related to your P&L statement?",
     answer: "",
     isCompleted: false,
   },
   {
     id: 3,
-    text: "Describe your ideal customer in as much detail as possible.",
+    text: "Your Ideal Customer: Describe your ideal customer in as much detail as possible.",
     answer: "",
     isCompleted: false,
+    followUpAnswer: "",
+    showFollowUp: false,
   },
 ];
 
@@ -37,6 +41,7 @@ const LiveExperience = () => {
   const [hasEnteredBusiness, setHasEnteredBusiness] = useState(false);
   const [questions, setQuestions] = useState<Question[]>(initialQuestions);
   const [currentQuestionId, setCurrentQuestionId] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleAnswerChange = (answer: string) => {
     setQuestions(questions.map(q => 
@@ -44,7 +49,24 @@ const LiveExperience = () => {
     ));
   };
 
+  const handleFollowUpAnswerChange = (followUpAnswer: string) => {
+    setQuestions(questions.map(q =>
+      q.id === currentQuestionId ? { ...q, followUpAnswer } : q
+    ));
+  };
+
   const handleSaveAnswer = () => {
+    if (currentQuestionId === 3 && !questions[2].showFollowUp) {
+      setIsLoading(true);
+      setTimeout(() => {
+        setQuestions(questions.map(q =>
+          q.id === 3 ? { ...q, showFollowUp: true } : q
+        ));
+        setIsLoading(false);
+      }, 3000);
+      return;
+    }
+
     setQuestions(questions.map(q =>
       q.id === currentQuestionId ? { ...q, isCompleted: true } : q
     ));
@@ -55,7 +77,6 @@ const LiveExperience = () => {
   };
 
   const canAccessQuestion = (questionId: number) => {
-    // Can access if it's the current question or a previous completed question
     return questionId <= currentQuestionId;
   };
 
@@ -80,7 +101,9 @@ const LiveExperience = () => {
       <QuestionForm
         question={currentQuestion}
         onAnswerChange={handleAnswerChange}
+        onFollowUpAnswerChange={handleFollowUpAnswerChange}
         onSave={handleSaveAnswer}
+        isLoading={isLoading}
       />
     </div>
   );
