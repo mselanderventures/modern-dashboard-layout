@@ -187,12 +187,12 @@ export const QuestionForm = ({
           )}
           {showMessage && (
             <div 
-              className={`bg-purple-50 border border-purple-100 rounded-lg p-4 transition-all duration-300 ${
+              className={`bg-[#F1F0FB] border border-gray-200 rounded-lg p-6 transition-all duration-300 ${
                 showMessage ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              <h3 className="text-lg font-semibold text-purple-900 mb-2">Message From Jeremy</h3>
-              <p className="text-purple-700">
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">Message From Jeremy</h3>
+              <p className="text-gray-700 leading-relaxed">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
               </p>
             </div>
