@@ -53,12 +53,26 @@ export const QuestionForm = ({
     }
   };
 
+  const getQuestionTitle = (id: number) => {
+    switch (id) {
+      case 1:
+        return "I Wish... #1";
+      case 2:
+        return "I Wish... #2";
+      case 3:
+        return "Your Ideal Customer";
+      default:
+        return "";
+    }
+  };
+
   return (
     <div className="flex-1 max-w-2xl space-y-6 animate-fade-in">
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold text-gray-900">
-          {question.text}
+          {getQuestionTitle(question.id)}
         </h2>
+        <p className="text-gray-600">{question.text}</p>
         <Textarea
           value={question.answer}
           onChange={(e) => onAnswerChange(e.target.value)}

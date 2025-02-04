@@ -16,19 +16,19 @@ interface Question {
 const initialQuestions: Question[] = [
   {
     id: 1,
-    text: "I Wish... #1: What are some \"I Wish\" statements related to the number of customers that you have?",
+    text: "What are some \"I Wish\" statements related to the number of customers that you have?",
     answer: "",
     isCompleted: false,
   },
   {
     id: 2,
-    text: "I Wish... #2: What are some \"I wish\" statements related to your P&L statement?",
+    text: "What are some \"I wish\" statements related to your P&L statement?",
     answer: "",
     isCompleted: false,
   },
   {
     id: 3,
-    text: "Your Ideal Customer: Describe your ideal customer in as much detail as possible.",
+    text: "Describe your ideal customer in as much detail as possible.",
     answer: "",
     isCompleted: false,
     followUpAnswer: "",
