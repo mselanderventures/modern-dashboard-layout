@@ -15,6 +15,7 @@ interface Question {
 
 interface QuestionFormProps {
   question: Question;
+  questions: Question[];
   onAnswerChange: (answer: string) => void;
   onFollowUpAnswerChange: (answer: string) => void;
   onSave: () => void;
@@ -23,10 +24,11 @@ interface QuestionFormProps {
 
 export const QuestionForm = ({ 
   question, 
+  questions,
   onAnswerChange, 
   onFollowUpAnswerChange,
   onSave,
-  isLoading 
+  isLoading
 }: QuestionFormProps) => {
   const { toast } = useToast();
   const [isVisible, setIsVisible] = useState(false);

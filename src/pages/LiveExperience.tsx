@@ -100,6 +100,7 @@ const LiveExperience = () => {
       />
       <QuestionForm
         question={currentQuestion}
+        questions={questions}
         onAnswerChange={handleAnswerChange}
         onFollowUpAnswerChange={handleFollowUpAnswerChange}
         onSave={handleSaveAnswer}
