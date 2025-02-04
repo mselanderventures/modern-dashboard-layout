@@ -82,7 +82,7 @@ export const QuestionForm = ({
         
         {question.id === 3 && question.showFollowUp && (
           <div className="space-y-4 animate-fade-in">
-            <h2 className="text-2xl font-semibold text-gray-900">
+            <h2 className="text-2xl font-semibold text-gray-900 mt-4">
               AI Follow Up Question
             </h2>
             <p className="text-gray-600">Can you go into more detail about the actual demographics of your customer? Are they old/young? Are they wealthy/on a budget?</p>
