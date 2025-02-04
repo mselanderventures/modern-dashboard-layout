@@ -12,6 +12,7 @@ interface Question {
   isCompleted: boolean;
   followUpAnswer?: string;
   showFollowUp?: boolean;
+  hasMessage?: boolean;
 }
 
 interface BusinessDetails {
@@ -27,12 +28,14 @@ const initialQuestions: Question[] = [
     text: "What are some \"I Wish\" statements related to the number of customers that you have?",
     answer: "",
     isCompleted: false,
+    hasMessage: false,
   },
   {
     id: 2,
     text: "What are some \"I wish\" statements related to your P&L statement?",
     answer: "",
     isCompleted: false,
+    hasMessage: false,
   },
   {
     id: 3,
@@ -41,6 +44,7 @@ const initialQuestions: Question[] = [
     isCompleted: false,
     followUpAnswer: "",
     showFollowUp: false,
+    hasMessage: false,
   },
 ];
 
@@ -132,42 +136,53 @@ const LiveExperience = () => {
           </div>
 
           {businessDetails && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
-              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                <div className="flex items-center">
-                  <Users className="h-5 w-5 text-purple-500 mr-2" />
-                  <span className="text-sm font-medium text-gray-500">Customers</span>
+            <>
+              <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                {businessDetails.name}
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
+                <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                  <div className="flex items-center">
+                    <Users className="h-5 w-5 text-purple-500 mr-2" />
+                    <span className="text-sm font-medium text-gray-500">Customers</span>
+                  </div>
+                  <p className="mt-2 text-2xl font-semibold text-gray-900">
+                    {new Intl.NumberFormat('en-US').format(businessDetails.customers)}
+                  </p>
                 </div>
-                <p className="mt-2 text-2xl font-semibold text-gray-900">
-                  {formatNumber(businessDetails.customers)}
-                </p>
-              </div>
-              
-              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                <div className="flex items-center">
-                  <DollarSign className="h-5 w-5 text-purple-500 mr-2" />
-                  <span className="text-sm font-medium text-gray-500">Revenue</span>
+                
+                <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                  <div className="flex items-center">
+                    <DollarSign className="h-5 w-5 text-purple-500 mr-2" />
+                    <span className="text-sm font-medium text-gray-500">Revenue</span>
+                  </div>
+                  <p className="mt-2 text-2xl font-semibold text-gray-900">
+                    {new Intl.NumberFormat('en-US', {
+                      style: 'currency',
+                      currency: 'USD',
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 0,
+                    }).format(businessDetails.revenue)}
+                  </p>
                 </div>
-                <p className="mt-2 text-2xl font-semibold text-gray-900">
-                  {formatCurrency(businessDetails.revenue)}
-                </p>
-              </div>
-              
-              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                <div className="flex items-center">
-                  <Percent className="h-5 w-5 text-purple-500 mr-2" />
-                  <span className="text-sm font-medium text-gray-500">Gross Margin</span>
+                
+                <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                  <div className="flex items-center">
+                    <Percent className="h-5 w-5 text-purple-500 mr-2" />
+                    <span className="text-sm font-medium text-gray-500">Gross Margin</span>
+                  </div>
+                  <p className="mt-2 text-2xl font-semibold text-gray-900">
+                    {businessDetails.grossMargin}%
+                  </p>
                 </div>
-                <p className="mt-2 text-2xl font-semibold text-gray-900">
-                  {businessDetails.grossMargin}%
-                </p>
               </div>
-            </div>
+            </>
           )}
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">Interactive Workbook</h2>
         <div className="flex gap-8 animate-fade-in">
           <QuestionSidebar
             questions={questions}
@@ -182,6 +197,11 @@ const LiveExperience = () => {
             onFollowUpAnswerChange={handleFollowUpAnswerChange}
             onSave={handleSaveAnswer}
             isLoading={isLoading}
+            onToggleMessage={(hasMessage) => {
+              setQuestions(questions.map(q =>
+                q.id === currentQuestionId ? { ...q, hasMessage } : q
+              ));
+            }}
           />
         </div>
       </div>

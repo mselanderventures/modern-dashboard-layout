@@ -1,4 +1,4 @@
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Question {
@@ -6,6 +6,7 @@ interface Question {
   text: string;
   answer: string;
   isCompleted: boolean;
+  hasMessage?: boolean;
 }
 
 interface QuestionSidebarProps {
@@ -53,9 +54,14 @@ export const QuestionSidebar = ({
           )}
         >
           <span className="flex-1 text-sm">{getQuestionTitle(question.id)}</span>
-          {question.isCompleted && (
-            <CheckCircle2 className="h-4 w-4 text-green-500 shrink-0" />
-          )}
+          <div className="flex items-center gap-2">
+            {question.hasMessage && (
+              <MessageCircle className="h-4 w-4 text-purple-400" />
+            )}
+            {question.isCompleted && (
+              <CheckCircle2 className="h-4 w-4 text-green-500 shrink-0" />
+            )}
+          </div>
         </button>
       ))}
     </div>

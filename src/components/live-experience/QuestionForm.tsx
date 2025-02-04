@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { CheckCircle2, ChevronRight, Loader2 } from "lucide-react";
+import { CheckCircle2, ChevronRight, Loader2, MessageCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 
 interface Question {
@@ -11,6 +11,7 @@ interface Question {
   isCompleted: boolean;
   followUpAnswer?: string;
   showFollowUp?: boolean;
+  hasMessage?: boolean;
 }
 
 interface QuestionFormProps {
@@ -20,6 +21,7 @@ interface QuestionFormProps {
   onFollowUpAnswerChange: (answer: string) => void;
   onSave: () => void;
   isLoading: boolean;
+  onToggleMessage: (hasMessage: boolean) => void;
 }
 
 export const QuestionForm = ({ 
@@ -28,15 +30,16 @@ export const QuestionForm = ({
   onAnswerChange, 
   onFollowUpAnswerChange,
   onSave,
-  isLoading
+  isLoading,
+  onToggleMessage
 }: QuestionFormProps) => {
   const { toast } = useToast();
   const [isVisible, setIsVisible] = useState(false);
   const [followUpVisible, setFollowUpVisible] = useState(false);
   const [mountedQuestionId, setMountedQuestionId] = useState(question.id);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
 
-  // Handle question transitions
   useEffect(() => {
     if (mountedQuestionId !== question.id) {
       setIsTransitioning(true);
@@ -95,6 +98,11 @@ export const QuestionForm = ({
         ),
       });
     }
+  };
+
+  const toggleMessage = () => {
+    setShowMessage(!showMessage);
+    onToggleMessage(!showMessage);
   };
 
   const getQuestionTitle = (id: number) => {
@@ -159,17 +167,41 @@ export const QuestionForm = ({
           </>
         )}
 
-        {isLoading ? (
-          <Button disabled className="w-full">
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Please wait
+        <div className="space-y-4">
+          {isLoading ? (
+            <Button disabled className="w-full">
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Please wait
+            </Button>
+          ) : (
+            <Button onClick={handleSave} className="w-full">
+              {currentQuestion.id === 3 && !currentQuestion.showFollowUp ? "Next" : "Save Answer"}
+              <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          )}
+
+          <Button 
+            variant="outline" 
+            onClick={toggleMessage} 
+            className="w-full border-purple-200 text-purple-700 hover:bg-purple-50"
+          >
+            <MessageCircle className="mr-2 h-4 w-4" />
+            DEMO: Message from Jeremy
           </Button>
-        ) : (
-          <Button onClick={handleSave} className="w-full">
-            {currentQuestion.id === 3 && !currentQuestion.showFollowUp ? "Next" : "Save Answer"}
-            <ChevronRight className="ml-2 h-4 w-4" />
-          </Button>
-        )}
+
+          {showMessage && (
+            <div 
+              className={`bg-purple-50 border border-purple-100 rounded-lg p-4 transition-all duration-300 ${
+                showMessage ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+            >
+              <h3 className="text-lg font-semibold text-purple-900 mb-2">Message From Jeremy</h3>
+              <p className="text-purple-700">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
