@@ -81,7 +81,7 @@ export const QuestionForm = ({
         />
         
         {question.id === 3 && question.showFollowUp && (
-          <div className="space-y-4 animate-fade-in">
+          <div className="space-y-4 animate-[fade-in_0.5s_ease-out,slide-in-right_0.5s_ease-out]">
             <h2 className="text-2xl font-semibold text-gray-900 mt-4">
               AI Follow Up Question
             </h2>
