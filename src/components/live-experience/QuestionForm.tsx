@@ -83,8 +83,9 @@ export const QuestionForm = ({
         {question.id === 3 && question.showFollowUp && (
           <div className="space-y-4 animate-fade-in">
             <h3 className="text-lg font-medium text-gray-800">
-              AI Follow Up Question: Can you go into more detail about the actual demographics of your customer? Are they old/young? Are they wealthy/on a budget?
+              AI Follow Up Question
             </h3>
+            <p className="text-gray-600">Can you go into more detail about the actual demographics of your customer? Are they old/young? Are they wealthy/on a budget?</p>
             <Textarea
               value={question.followUpAnswer}
               onChange={(e) => onFollowUpAnswerChange(e.target.value)}
