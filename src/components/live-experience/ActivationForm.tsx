@@ -45,13 +45,13 @@ export const ActivationForm = ({ onUnlock }: ActivationFormProps) => {
 
   return (
     <div className="space-y-8">
-      <div className="relative h-[30vh] w-full overflow-hidden rounded-lg">
+      <div className="relative h-[30vh] w-full overflow-hidden">
         <img
           src="/lovable-uploads/4f29a7be-e1a6-4599-92b0-deb671ce8b79.png"
           alt="Event Banner"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-background/20" />
+        <div className="absolute inset-0" />
       </div>
 
       <div className="max-w-4xl mx-auto space-y-8">
