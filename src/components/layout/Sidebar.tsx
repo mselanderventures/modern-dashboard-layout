@@ -1,15 +1,13 @@
-import { Home, Users, Radio, MessageCircle } from "lucide-react";
+import { Home, Users, Radio } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 interface SidebarProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-  onMessageClick?: () => void;
-  showMessageButton?: boolean;
 }
 
-export const Sidebar = ({ isOpen, setIsOpen, onMessageClick, showMessageButton }: SidebarProps) => {
+export const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
   const navItems = [
     { icon: Home, label: "Home", path: "/" },
     { icon: Radio, label: "The Live Experience", path: "/live" },
@@ -59,17 +57,6 @@ export const Sidebar = ({ isOpen, setIsOpen, onMessageClick, showMessageButton }
             </NavLink>
           ))}
         </nav>
-        {showMessageButton && (
-          <div className="p-4 border-t border-gray-200">
-            <button
-              onClick={onMessageClick}
-              className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-purple-700 bg-purple-50 hover:bg-purple-100 transition-colors duration-200"
-            >
-              <MessageCircle className="w-5 h-5" />
-              <span>Message from Jeremy</span>
-            </button>
-          </div>
-        )}
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="lg:hidden absolute -right-10 top-4 bg-white p-2 rounded-r-lg border border-l-0 border-gray-200"

@@ -21,7 +21,7 @@ interface QuestionFormProps {
   onFollowUpAnswerChange: (answer: string) => void;
   onSave: () => void;
   isLoading: boolean;
-  onToggleMessage: (hasMessage: boolean) => void;
+  onToggleMessage: () => void;
 }
 
 export const QuestionForm = ({ 
@@ -49,13 +49,12 @@ export const QuestionForm = ({
         setMountedQuestionId(question.id);
         setIsTransitioning(false);
         setIsVisible(true);
-      }, 300); // Match this with the CSS transition duration
+      }, 300);
       
       return () => clearTimeout(transitionTimer);
     }
   }, [question.id, mountedQuestionId]);
 
-  // Handle initial visibility
   useEffect(() => {
     if (!isTransitioning) {
       const timer = setTimeout(() => {
@@ -65,7 +64,6 @@ export const QuestionForm = ({
     }
   }, [isTransitioning]);
 
-  // Handle follow-up question visibility
   useEffect(() => {
     if (question.showFollowUp) {
       const timer = setTimeout(() => {
@@ -87,22 +85,11 @@ export const QuestionForm = ({
       return;
     }
     onSave();
-    if (!(question.id === 3 && !question.showFollowUp)) {
-      toast({
-        title: "Success",
-        description: (
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="h-4 w-4 text-green-500" />
-            <span>Answer saved successfully!</span>
-          </div>
-        ),
-      });
-    }
   };
 
   const toggleMessage = () => {
     setShowMessage(!showMessage);
-    onToggleMessage(!showMessage);
+    onToggleMessage();
   };
 
   const getQuestionTitle = (id: number) => {
@@ -113,6 +100,19 @@ export const QuestionForm = ({
         return "I Wish... #2";
       case 3:
         return "Your Ideal Customer";
+      default:
+        return "";
+    }
+  };
+
+  const getFollowUpQuestion = (id: number) => {
+    switch (id) {
+      case 1:
+        return "Looking at your customer acquisition goals, what specific challenges or roadblocks do you face in reaching these numbers?";
+      case 2:
+        return "Can you elaborate on which specific aspects of your P&L statement concern you the most and why?";
+      case 3:
+        return "Can you go into more detail about the actual demographics of your customer? Are they old/young? Are they wealthy/on a budget?";
       default:
         return "";
     }
@@ -140,31 +140,27 @@ export const QuestionForm = ({
           className="min-h-[200px]"
         />
         
-        {currentQuestion.id === 3 && (
-          <>
-            {currentQuestion.showFollowUp && (
-              <div 
-                className={`space-y-4 transition-all duration-300 ${
-                  followUpVisible 
-                    ? "opacity-100 translate-x-0" 
-                    : "opacity-0 translate-x-4"
-                }`}
-              >
-                <h2 className="text-2xl font-semibold text-gray-900 mt-8">
-                  AI Follow Up Question
-                </h2>
-                <p className="text-gray-600">
-                  Can you go into more detail about the actual demographics of your customer? Are they old/young? Are they wealthy/on a budget?
-                </p>
-                <Textarea
-                  value={currentQuestion.followUpAnswer}
-                  onChange={(e) => onFollowUpAnswerChange(e.target.value)}
-                  placeholder="Type your follow-up answer here..."
-                  className="min-h-[200px]"
-                />
-              </div>
-            )}
-          </>
+        {currentQuestion.showFollowUp && (
+          <div 
+            className={`space-y-4 transition-all duration-300 ${
+              followUpVisible 
+                ? "opacity-100 translate-x-0" 
+                : "opacity-0 translate-x-4"
+            }`}
+          >
+            <h2 className="text-2xl font-semibold text-gray-900 mt-8">
+              AI Follow Up Question
+            </h2>
+            <p className="text-gray-600">
+              {getFollowUpQuestion(currentQuestion.id)}
+            </p>
+            <Textarea
+              value={currentQuestion.followUpAnswer}
+              onChange={(e) => onFollowUpAnswerChange(e.target.value)}
+              placeholder="Type your follow-up answer here..."
+              className="min-h-[200px]"
+            />
+          </div>
         )}
 
         <div className="space-y-4">
@@ -175,8 +171,18 @@ export const QuestionForm = ({
             </Button>
           ) : (
             <Button onClick={handleSave} className="w-full">
-              {currentQuestion.id === 3 && !currentQuestion.showFollowUp ? "Next" : "Save Answer"}
+              {!currentQuestion.showFollowUp ? "Next" : "Save Answer"}
               <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          )}
+          {currentQuestion.id === 2 && (
+            <Button
+              onClick={toggleMessage}
+              variant="outline"
+              className="w-full flex items-center gap-2"
+            >
+              <MessageCircle className="h-4 w-4" />
+              DEMO: Message from Jeremy
             </Button>
           )}
           {showMessage && (

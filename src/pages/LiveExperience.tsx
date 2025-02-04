@@ -28,13 +28,16 @@ const initialQuestions: Question[] = [
     text: "What are some \"I Wish\" statements related to the number of customers that you have?",
     answer: "",
     isCompleted: false,
-    hasMessage: false,
+    followUpAnswer: "",
+    showFollowUp: false,
   },
   {
     id: 2,
     text: "What are some \"I wish\" statements related to your P&L statement?",
     answer: "",
     isCompleted: false,
+    followUpAnswer: "",
+    showFollowUp: false,
     hasMessage: false,
   },
   {
@@ -44,7 +47,6 @@ const initialQuestions: Question[] = [
     isCompleted: false,
     followUpAnswer: "",
     showFollowUp: false,
-    hasMessage: false,
   },
 ];
 
@@ -74,11 +76,13 @@ const LiveExperience = () => {
   };
 
   const handleSaveAnswer = () => {
-    if (currentQuestionId === 3 && !questions[2].showFollowUp) {
+    const currentQuestion = questions.find(q => q.id === currentQuestionId)!;
+    
+    if (!currentQuestion.showFollowUp) {
       setIsLoading(true);
       setTimeout(() => {
         setQuestions(questions.map(q =>
-          q.id === 3 ? { ...q, showFollowUp: true } : q
+          q.id === currentQuestionId ? { ...q, showFollowUp: true } : q
         ));
         setIsLoading(false);
       }, 3000);
