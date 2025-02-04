@@ -57,6 +57,7 @@ const LiveExperience = () => {
     toast({
       title: "Success",
       description: "Experience unlocked successfully!",
+      icon: <CheckCircle2 className="h-4 w-4 text-green-500" />,
     });
   };
 
@@ -73,6 +74,7 @@ const LiveExperience = () => {
     toast({
       title: "Success",
       description: "Business name saved successfully!",
+      icon: <CheckCircle2 className="h-4 w-4 text-green-500" />,
     });
   };
 
@@ -80,6 +82,11 @@ const LiveExperience = () => {
     setQuestions(questions.map(q => 
       q.id === currentQuestionId ? { ...q, answer } : q
     ));
+  };
+
+  const canAccessQuestion = (questionId: number) => {
+    // Can access if it's the current question or a previous completed question
+    return questionId <= currentQuestionId;
   };
 
   const handleSaveAnswer = () => {
@@ -104,6 +111,7 @@ const LiveExperience = () => {
     toast({
       title: "Success",
       description: "Answer saved successfully!",
+      icon: <CheckCircle2 className="h-4 w-4 text-green-500" />,
     });
   };
 
@@ -161,20 +169,21 @@ const LiveExperience = () => {
         {questions.map((question) => (
           <button
             key={question.id}
-            onClick={() => setCurrentQuestionId(question.id)}
+            onClick={() => canAccessQuestion(question.id) && setCurrentQuestionId(question.id)}
             className={cn(
               "w-full text-left p-3 rounded-lg transition-all duration-200 flex items-center gap-3",
               currentQuestionId === question.id
                 ? "bg-primary text-primary-foreground"
                 : question.isCompleted
-                ? "bg-secondary text-secondary-foreground"
+                ? "bg-green-100 text-green-800 hover:bg-green-200"
                 : "bg-muted text-muted-foreground",
-              "hover:opacity-90"
+              !canAccessQuestion(question.id) && "opacity-50 cursor-not-allowed",
+              canAccessQuestion(question.id) && "hover:opacity-90"
             )}
           >
             <span className="flex-1 text-sm">Question {question.id}</span>
             {question.isCompleted && (
-              <CheckCircle2 className="h-4 w-4 shrink-0" />
+              <CheckCircle2 className="h-4 w-4 text-green-500 shrink-0" />
             )}
           </button>
         ))}
@@ -195,7 +204,7 @@ const LiveExperience = () => {
           />
           <Button 
             onClick={handleSaveAnswer}
-            className="w-full"
+            className="w-full bg-green-500 hover:bg-green-600"
           >
             Save Answer
             <ChevronRight className="ml-2 h-4 w-4" />
