@@ -56,8 +56,12 @@ const LiveExperience = () => {
     setIsUnlocked(true);
     toast({
       title: "Success",
-      description: "Experience unlocked successfully!",
-      icon: <CheckCircle2 className="h-4 w-4 text-green-500" />,
+      description: (
+        <div className="flex items-center gap-2">
+          <CheckCircle2 className="h-4 w-4 text-green-500" />
+          <span>Experience unlocked successfully!</span>
+        </div>
+      ),
     });
   };
 
@@ -73,8 +77,12 @@ const LiveExperience = () => {
     setHasEnteredBusiness(true);
     toast({
       title: "Success",
-      description: "Business name saved successfully!",
-      icon: <CheckCircle2 className="h-4 w-4 text-green-500" />,
+      description: (
+        <div className="flex items-center gap-2">
+          <CheckCircle2 className="h-4 w-4 text-green-500" />
+          <span>Business name saved successfully!</span>
+        </div>
+      ),
     });
   };
 
@@ -110,7 +118,12 @@ const LiveExperience = () => {
 
     toast({
       title: "Success",
-      description: "Answer saved successfully!",
+      description: (
+        <div className="flex items-center gap-2">
+          <CheckCircle2 className="h-4 w-4 text-green-500" />
+          <span>Answer saved successfully!</span>
+        </div>
+      ),
     });
   };
 
