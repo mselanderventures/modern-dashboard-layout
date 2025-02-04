@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { Textarea } from "@/components/ui/textarea";
 import { CheckCircle2, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -111,7 +111,6 @@ const LiveExperience = () => {
     toast({
       title: "Success",
       description: "Answer saved successfully!",
-      icon: <CheckCircle2 className="h-4 w-4 text-green-500" />,
     });
   };
 
@@ -204,7 +203,7 @@ const LiveExperience = () => {
           />
           <Button 
             onClick={handleSaveAnswer}
-            className="w-full bg-green-500 hover:bg-green-600"
+            className="w-full"
           >
             Save Answer
             <ChevronRight className="ml-2 h-4 w-4" />
