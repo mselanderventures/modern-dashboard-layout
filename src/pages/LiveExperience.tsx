@@ -94,17 +94,10 @@ const LiveExperience = () => {
     setHasEnteredBusiness(true);
   };
 
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(amount);
-  };
-
-  const formatNumber = (num: number) => {
-    return new Intl.NumberFormat('en-US').format(num);
+  const handleMessageClick = () => {
+    setQuestions(questions.map(q =>
+      q.id === currentQuestionId ? { ...q, hasMessage: !q.hasMessage } : q
+    ));
   };
 
   if (!isUnlocked) {
@@ -121,7 +114,7 @@ const LiveExperience = () => {
     <div className="min-h-screen bg-gray-50">
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-          <div className="mb-6">
+          <div className="mb-4">
             <h1 className="text-3xl font-bold text-gray-900">
               Founder's Fortune Academy by Jeremy Schwartz
             </h1>
@@ -137,10 +130,10 @@ const LiveExperience = () => {
 
           {businessDetails && (
             <>
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">
+              <h2 className="text-xl font-semibold text-gray-800 mb-3">
                 {businessDetails.name}
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
                   <div className="flex items-center">
                     <Users className="h-5 w-5 text-purple-500 mr-2" />
@@ -197,11 +190,7 @@ const LiveExperience = () => {
             onFollowUpAnswerChange={handleFollowUpAnswerChange}
             onSave={handleSaveAnswer}
             isLoading={isLoading}
-            onToggleMessage={(hasMessage) => {
-              setQuestions(questions.map(q =>
-                q.id === currentQuestionId ? { ...q, hasMessage } : q
-              ));
-            }}
+            onToggleMessage={handleMessageClick}
           />
         </div>
       </div>

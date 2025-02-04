@@ -1,13 +1,15 @@
-import { Home, Users, Radio } from "lucide-react";
+import { Home, Users, Radio, MessageCircle } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 interface SidebarProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  onMessageClick?: () => void;
+  showMessageButton?: boolean;
 }
 
-export const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
+export const Sidebar = ({ isOpen, setIsOpen, onMessageClick, showMessageButton }: SidebarProps) => {
   const navItems = [
     { icon: Home, label: "Home", path: "/" },
     { icon: Radio, label: "The Live Experience", path: "/live" },
@@ -32,7 +34,11 @@ export const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
         )}
       >
         <div className="p-4 border-b border-gray-200">
-          <h1 className="text-xl font-semibold text-gray-800">Dashboard</h1>
+          <img 
+            src="/lovable-uploads/96d0c5c9-b455-48f5-a612-2e3fdb9d8565.png" 
+            alt="Founder's Fortune" 
+            className="h-8"
+          />
         </div>
         <nav className="flex-1 p-4 space-y-1">
           {navItems.map((item) => (
@@ -53,6 +59,17 @@ export const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
             </NavLink>
           ))}
         </nav>
+        {showMessageButton && (
+          <div className="p-4 border-t border-gray-200">
+            <button
+              onClick={onMessageClick}
+              className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-purple-700 bg-purple-50 hover:bg-purple-100 transition-colors duration-200"
+            >
+              <MessageCircle className="w-5 h-5" />
+              <span>Message from Jeremy</span>
+            </button>
+          </div>
+        )}
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="lg:hidden absolute -right-10 top-4 bg-white p-2 rounded-r-lg border border-l-0 border-gray-200"
