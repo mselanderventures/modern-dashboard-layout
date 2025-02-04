@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { CheckCircle2, ChevronRight, Loader2 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface Question {
   id: number;
@@ -29,6 +29,29 @@ export const QuestionForm = ({
   isLoading 
 }: QuestionFormProps) => {
   const { toast } = useToast();
+  const [isVisible, setIsVisible] = useState(false);
+  const [followUpVisible, setFollowUpVisible] = useState(false);
+
+  // Handle main question visibility
+  useEffect(() => {
+    setIsVisible(false);
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 50);
+    return () => clearTimeout(timer);
+  }, [question.id]);
+
+  // Handle follow-up question visibility
+  useEffect(() => {
+    if (question.showFollowUp) {
+      const timer = setTimeout(() => {
+        setFollowUpVisible(true);
+      }, 50);
+      return () => clearTimeout(timer);
+    } else {
+      setFollowUpVisible(false);
+    }
+  }, [question.showFollowUp]);
 
   const handleSave = () => {
     if (!question.answer.trim()) {
@@ -67,8 +90,14 @@ export const QuestionForm = ({
   };
 
   return (
-    <div className="flex-1 max-w-2xl space-y-6 animate-fade-in">
-      <div className="space-y-4">
+    <div className="flex-1 max-w-2xl">
+      <div 
+        className={`space-y-4 transition-all duration-500 ${
+          isVisible 
+            ? "opacity-100 translate-x-0" 
+            : "opacity-0 -translate-x-4"
+        }`}
+      >
         <h2 className="text-2xl font-semibold text-gray-900">
           {getQuestionTitle(question.id)}
         </h2>
@@ -80,19 +109,31 @@ export const QuestionForm = ({
           className="min-h-[200px]"
         />
         
-        {question.id === 3 && question.showFollowUp && (
-          <div className="space-y-4 animate-[fade-in_0.5s_ease-out,slide-in-right_0.5s_ease-out]">
-            <h2 className="text-2xl font-semibold text-gray-900 mt-4">
-              AI Follow Up Question
-            </h2>
-            <p className="text-gray-600">Can you go into more detail about the actual demographics of your customer? Are they old/young? Are they wealthy/on a budget?</p>
-            <Textarea
-              value={question.followUpAnswer}
-              onChange={(e) => onFollowUpAnswerChange(e.target.value)}
-              placeholder="Type your follow-up answer here..."
-              className="min-h-[200px]"
-            />
-          </div>
+        {question.id === 3 && (
+          <>
+            {question.showFollowUp && (
+              <div 
+                className={`space-y-4 transition-all duration-500 ${
+                  followUpVisible 
+                    ? "opacity-100 translate-x-0" 
+                    : "opacity-0 translate-x-4"
+                }`}
+              >
+                <h2 className="text-2xl font-semibold text-gray-900 mt-4">
+                  AI Follow Up Question
+                </h2>
+                <p className="text-gray-600">
+                  Can you go into more detail about the actual demographics of your customer? Are they old/young? Are they wealthy/on a budget?
+                </p>
+                <Textarea
+                  value={question.followUpAnswer}
+                  onChange={(e) => onFollowUpAnswerChange(e.target.value)}
+                  placeholder="Type your follow-up answer here..."
+                  className="min-h-[200px]"
+                />
+              </div>
+            )}
+          </>
         )}
 
         {isLoading ? (
