@@ -8,7 +8,7 @@ export const DashboardLayout = () => {
   return (
     <div className="min-h-screen flex w-full bg-background">
       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
-      <main className="flex-1 p-8 transition-all duration-300 ease-in-out">
+      <main className="flex-1 transition-all duration-300 ease-in-out">
         <Outlet />
       </main>
     </div>
