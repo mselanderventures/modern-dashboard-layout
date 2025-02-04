@@ -37,7 +37,7 @@ export const Sidebar = ({ isOpen, setIsOpen, onMessageClick, showMessageButton }
           <img 
             src="/lovable-uploads/96d0c5c9-b455-48f5-a612-2e3fdb9d8565.png" 
             alt="Founder's Fortune" 
-            className="h-8"
+            className="h-12"
           />
         </div>
         <nav className="flex-1 p-4 space-y-1">
