@@ -1,11 +1,13 @@
-// Update this page (the content is just a fallback if you fail to update the page)
-
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-semibold text-gray-800">Welcome Back</h1>
+      </div>
+      <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+        <p className="text-gray-600">
+          Select a section from the sidebar to get started.
+        </p>
       </div>
     </div>
   );
