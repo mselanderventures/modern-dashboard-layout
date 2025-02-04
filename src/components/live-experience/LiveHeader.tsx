@@ -15,7 +15,7 @@ export const LiveHeader = ({ businessDetails }: LiveHeaderProps) => {
   return (
     <div className="bg-white border-b">
       <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-        <div className="mb-4">
+        <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">
             Founder's Fortune Academy by Jeremy Schwartz
           </h1>
@@ -31,11 +31,11 @@ export const LiveHeader = ({ businessDetails }: LiveHeaderProps) => {
 
         {businessDetails && (
           <>
-            <h2 className="text-xl font-semibold text-gray-800 mb-3">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">
               {businessDetails.name}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-purple-200 transition-all duration-300">
                 <div className="flex items-center">
                   <Users className="h-5 w-5 text-purple-500 mr-2" />
                   <span className="text-sm font-medium text-gray-500">Customers</span>
@@ -45,7 +45,7 @@ export const LiveHeader = ({ businessDetails }: LiveHeaderProps) => {
                 </p>
               </div>
               
-              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-purple-200 transition-all duration-300">
                 <div className="flex items-center">
                   <DollarSign className="h-5 w-5 text-purple-500 mr-2" />
                   <span className="text-sm font-medium text-gray-500">Revenue</span>
@@ -60,7 +60,7 @@ export const LiveHeader = ({ businessDetails }: LiveHeaderProps) => {
                 </p>
               </div>
               
-              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-purple-200 transition-all duration-300">
                 <div className="flex items-center">
                   <Percent className="h-5 w-5 text-purple-500 mr-2" />
                   <span className="text-sm font-medium text-gray-500">Gross Margin</span>

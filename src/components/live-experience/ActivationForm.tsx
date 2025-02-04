@@ -46,7 +46,7 @@ export const ActivationForm = ({ onUnlock }: ActivationFormProps) => {
     <div className="space-y-8">
       <div className="relative h-[30vh] w-full">
         <img 
-          src="/lovable-uploads/d1cf653d-5e53-4394-87ac-97daadce0889.png"
+          src="/lovable-uploads/ad4de68b-6b79-4043-8600-905082164ac5.png"
           alt="Event Banner"
           className="w-full h-full object-cover"
         />

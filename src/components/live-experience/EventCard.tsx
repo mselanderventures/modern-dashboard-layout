@@ -60,7 +60,7 @@ export const EventCard = ({
           <div className="absolute inset-0 bg-white/40 backdrop-blur-sm" />
         </div>
       )}
-      <CardHeader className="relative">
+      <CardHeader className="relative pb-2">
         <div className="flex items-center gap-2">
           {isVirtual ? (
             <Monitor className="h-5 w-5 text-purple-500" />
@@ -86,7 +86,7 @@ export const EventCard = ({
           </div>
         )}
       </CardContent>
-      <CardFooter className="flex gap-3">
+      <CardFooter className="pt-2">
         {isActive ? (
           <Button 
             onClick={handleJoin} 

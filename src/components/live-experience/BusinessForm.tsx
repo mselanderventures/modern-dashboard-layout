@@ -58,62 +58,64 @@ export const BusinessForm = ({ onSubmit }: BusinessFormProps) => {
   };
 
   return (
-    <div className="max-w-md mx-auto space-y-6 animate-fade-in">
-      <h2 className="text-2xl font-semibold text-gray-900">Business Details</h2>
-      <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            What is the name of your business?
-          </label>
-          <Input
-            type="text"
-            value={businessName}
-            onChange={(e) => setBusinessName(e.target.value)}
-            placeholder="Enter your business name"
-          />
-        </div>
-        
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Number of Customers
-          </label>
-          <Input
-            type="number"
-            value={customers}
-            onChange={(e) => setCustomers(e.target.value)}
-            placeholder="Enter number of customers"
-          />
-        </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="max-w-md w-full mx-auto p-8 bg-white rounded-lg shadow-sm space-y-6 animate-fade-in">
+        <h2 className="text-2xl font-semibold text-gray-900">Business Details</h2>
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              What is the name of your business?
+            </label>
+            <Input
+              type="text"
+              value={businessName}
+              onChange={(e) => setBusinessName(e.target.value)}
+              placeholder="Enter your business name"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Number of Customers
+            </label>
+            <Input
+              type="number"
+              value={customers}
+              onChange={(e) => setCustomers(e.target.value)}
+              placeholder="Enter number of customers"
+            />
+          </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Annual Revenue ($)
-          </label>
-          <Input
-            type="number"
-            value={revenue}
-            onChange={(e) => setRevenue(e.target.value)}
-            placeholder="Enter annual revenue"
-          />
-        </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Annual Revenue ($)
+            </label>
+            <Input
+              type="number"
+              value={revenue}
+              onChange={(e) => setRevenue(e.target.value)}
+              placeholder="Enter annual revenue"
+            />
+          </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Gross Margin (%)
-          </label>
-          <Input
-            type="number"
-            value={grossMargin}
-            onChange={(e) => setGrossMargin(e.target.value)}
-            min="0"
-            max="100"
-            placeholder="Enter gross margin percentage"
-          />
-        </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Gross Margin (%)
+            </label>
+            <Input
+              type="number"
+              value={grossMargin}
+              onChange={(e) => setGrossMargin(e.target.value)}
+              min="0"
+              max="100"
+              placeholder="Enter gross margin percentage"
+            />
+          </div>
 
-        <Button onClick={handleBusinessSubmit} className="w-full">
-          Continue <ChevronRight className="ml-2 h-4 w-4" />
-        </Button>
+          <Button onClick={handleBusinessSubmit} className="w-full">
+            Continue <ChevronRight className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
       </div>
     </div>
   );
