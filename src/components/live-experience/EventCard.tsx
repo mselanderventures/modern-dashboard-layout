@@ -41,7 +41,7 @@ export const EventCard = ({
   };
 
   return (
-    <Card className={`w-full overflow-hidden group transition-all duration-300 hover:shadow-lg border-2 ${isActive ? 'hover:border-purple-300' : 'hover:border-purple-200'}`}>
+    <Card className={`relative w-full overflow-hidden group transition-all duration-300 hover:shadow-lg border-2 ${isActive ? 'hover:border-purple-300' : 'hover:border-purple-200'}`}>
       {image ? (
         <div className="relative h-48">
           <img 
