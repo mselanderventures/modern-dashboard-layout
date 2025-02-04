@@ -179,16 +179,6 @@ export const QuestionForm = ({
               <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
           )}
-
-          <Button 
-            variant="outline" 
-            onClick={toggleMessage} 
-            className="w-full border-purple-200 text-purple-700 hover:bg-purple-50"
-          >
-            <MessageCircle className="mr-2 h-4 w-4" />
-            DEMO: Message from Jeremy
-          </Button>
-
           {showMessage && (
             <div 
               className={`bg-purple-50 border border-purple-100 rounded-lg p-4 transition-all duration-300 ${

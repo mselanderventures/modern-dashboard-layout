@@ -73,7 +73,7 @@ export const EventCard = ({
         </div>
         <p className="text-muted-foreground font-medium">{date}</p>
       </CardHeader>
-      <CardContent className="pt-2">
+      <CardContent className="">
         {isActive && showActivation && (
           <div className="space-y-3 animate-in fade-in slide-in-from-top-2 duration-300">
             <Input
@@ -86,7 +86,7 @@ export const EventCard = ({
           </div>
         )}
       </CardContent>
-      <CardFooter className="pt-2">
+      <CardFooter className="">
         {isActive ? (
           <Button 
             onClick={handleJoin} 

@@ -1,8 +1,9 @@
-import { useState } from "react";
 import { ActivationForm } from "@/components/live-experience/ActivationForm";
 import { BusinessForm } from "@/components/live-experience/BusinessForm";
 import { LiveHeader } from "@/components/live-experience/LiveHeader";
 import { InteractiveWorkbook } from "@/components/live-experience/InteractiveWorkbook";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 interface Question {
   id: number;
@@ -54,6 +55,11 @@ const LiveExperience = () => {
   const [currentQuestionId, setCurrentQuestionId] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [businessDetails, setBusinessDetails] = useState<BusinessDetails | null>(null);
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    setIsUnlocked(searchParams.get("unlocked") === "true");
+  }, [searchParams]);
 
   const handleAnswerChange = (answer: string) => {
     setQuestions(questions.map(q => 

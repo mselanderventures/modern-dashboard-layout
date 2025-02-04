@@ -59,7 +59,7 @@ export const BusinessForm = ({ onSubmit }: BusinessFormProps) => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full mx-auto p-8 bg-white rounded-lg shadow-sm space-y-6 animate-fade-in">
+      <div className="max-w-lg w-full mx-auto p-12 bg-white rounded-lg shadow-sm space-y-6 animate-fade-in">
         <h2 className="text-2xl font-semibold text-gray-900">Business Details</h2>
         <div className="space-y-4">
           <div>
