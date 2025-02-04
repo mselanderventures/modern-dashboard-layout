@@ -12,11 +12,9 @@ interface ActivationFormProps {
 
 export const ActivationForm = ({ onUnlock }: ActivationFormProps) => {
   const { toast } = useToast();
-  const [activationCode, setActivationCode] = useState("");
-  const [showActivation, setShowActivation] = useState(false);
 
-  const handleUnlock = () => {
-    if (activationCode.trim() === "") {
+  const handleUnlock = (code: string) => {
+    if (code.trim() === "") {
       toast({
         title: "Error",
         description: "Please enter an activation code",
@@ -46,57 +44,37 @@ export const ActivationForm = ({ onUnlock }: ActivationFormProps) => {
   return (
     <div className="space-y-8">
       <div className="relative h-[30vh] w-full overflow-hidden">
-        <img
-          src="/lovable-uploads/4f29a7be-e1a6-4599-92b0-deb671ce8b79.png"
-          alt="Event Banner"
+        <img 
+          src="/lovable-uploads/4f29a7be-e1a6-4599-92b0-deb671ce8b79.png" 
+          alt="Event Banner" 
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0" />
       </div>
 
       <div className="max-w-4xl mx-auto space-y-8">
-        {showActivation ? (
-          <div className="max-w-md mx-auto space-y-6 animate-fade-in">
-            <Alert>
-              <AlertDescription>
-                Please enter your activation code to join the live experience
-              </AlertDescription>
-            </Alert>
-            <div className="flex gap-4">
-              <Input
-                type="text"
-                value={activationCode}
-                onChange={(e) => setActivationCode(e.target.value)}
-                placeholder="Enter activation code"
-                className="flex-1"
-              />
-              <Button onClick={handleUnlock}>Enter</Button>
-            </div>
-          </div>
-        ) : (
-          <div className="grid gap-6 md:grid-cols-3 animate-fade-in">
-            <EventCard
-              city="Miami"
-              country="Florida"
-              date="Feb 14th"
-              isActive
-              onRegister={handleRegister}
-              onJoin={() => setShowActivation(true)}
-            />
-            <EventCard
-              city="London"
-              country="England"
-              date="Mar 1st"
-              onRegister={handleRegister}
-            />
-            <EventCard
-              city="Dubai"
-              country="UAE"
-              date="April 1st"
-              onRegister={handleRegister}
-            />
-          </div>
-        )}
+        <div className="grid gap-6 md:grid-cols-3 animate-fade-in">
+          <EventCard
+            city="Miami"
+            country="Florida"
+            date="Feb 14th"
+            isActive
+            onRegister={handleRegister}
+            onJoin={handleUnlock}
+          />
+          <EventCard
+            city="London"
+            country="England"
+            date="Mar 1st"
+            onRegister={handleRegister}
+          />
+          <EventCard
+            city="Dubai"
+            country="UAE"
+            date="April 1st"
+            onRegister={handleRegister}
+          />
+        </div>
       </div>
     </div>
   );
