@@ -31,15 +31,34 @@ export const QuestionForm = ({
   const { toast } = useToast();
   const [isVisible, setIsVisible] = useState(false);
   const [followUpVisible, setFollowUpVisible] = useState(false);
+  const [mountedQuestionId, setMountedQuestionId] = useState(question.id);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Handle main question visibility
+  // Handle question transitions
   useEffect(() => {
-    setIsVisible(false);
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 50);
-    return () => clearTimeout(timer);
-  }, [question.id]);
+    if (mountedQuestionId !== question.id) {
+      setIsTransitioning(true);
+      setIsVisible(false);
+      
+      const transitionTimer = setTimeout(() => {
+        setMountedQuestionId(question.id);
+        setIsTransitioning(false);
+        setIsVisible(true);
+      }, 300); // Match this with the CSS transition duration
+      
+      return () => clearTimeout(transitionTimer);
+    }
+  }, [question.id, mountedQuestionId]);
+
+  // Handle initial visibility
+  useEffect(() => {
+    if (!isTransitioning) {
+      const timer = setTimeout(() => {
+        setIsVisible(true);
+      }, 50);
+      return () => clearTimeout(timer);
+    }
+  }, [isTransitioning]);
 
   // Handle follow-up question visibility
   useEffect(() => {
@@ -89,31 +108,33 @@ export const QuestionForm = ({
     }
   };
 
+  const currentQuestion = isTransitioning ? questions.find(q => q.id === mountedQuestionId)! : question;
+
   return (
     <div className="flex-1 max-w-2xl">
       <div 
-        className={`space-y-4 transition-all duration-500 ${
+        className={`space-y-4 transition-all duration-300 ${
           isVisible 
             ? "opacity-100 translate-x-0" 
             : "opacity-0 -translate-x-4"
         }`}
       >
         <h2 className="text-2xl font-semibold text-gray-900">
-          {getQuestionTitle(question.id)}
+          {getQuestionTitle(currentQuestion.id)}
         </h2>
-        <p className="text-gray-600">{question.text}</p>
+        <p className="text-gray-600">{currentQuestion.text}</p>
         <Textarea
-          value={question.answer}
+          value={currentQuestion.answer}
           onChange={(e) => onAnswerChange(e.target.value)}
           placeholder="Type your answer here..."
           className="min-h-[200px]"
         />
         
-        {question.id === 3 && (
+        {currentQuestion.id === 3 && (
           <>
-            {question.showFollowUp && (
+            {currentQuestion.showFollowUp && (
               <div 
-                className={`space-y-4 transition-all duration-500 ${
+                className={`space-y-4 transition-all duration-300 ${
                   followUpVisible 
                     ? "opacity-100 translate-x-0" 
                     : "opacity-0 translate-x-4"
@@ -126,7 +147,7 @@ export const QuestionForm = ({
                   Can you go into more detail about the actual demographics of your customer? Are they old/young? Are they wealthy/on a budget?
                 </p>
                 <Textarea
-                  value={question.followUpAnswer}
+                  value={currentQuestion.followUpAnswer}
                   onChange={(e) => onFollowUpAnswerChange(e.target.value)}
                   placeholder="Type your follow-up answer here..."
                   className="min-h-[200px]"
@@ -143,7 +164,7 @@ export const QuestionForm = ({
           </Button>
         ) : (
           <Button onClick={handleSave} className="w-full">
-            {question.id === 3 && !question.showFollowUp ? "Next" : "Save Answer"}
+            {currentQuestion.id === 3 && !currentQuestion.showFollowUp ? "Next" : "Save Answer"}
             <ChevronRight className="ml-2 h-4 w-4" />
           </Button>
         )}
