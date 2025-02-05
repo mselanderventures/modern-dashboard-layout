@@ -3,7 +3,7 @@ import { Sidebar } from "./Sidebar";
 import { Outlet, useLocation } from "react-router-dom";
 
 export const DashboardLayout = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
   const isLiveExperience = location.pathname === "/live";
 

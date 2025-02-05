@@ -44,13 +44,23 @@ export const ActivationForm = ({ onUnlock }: ActivationFormProps) => {
 
   return (
     <div className="space-y-8">
-      <div className="relative h-[30vh] w-full">
-        <img 
-          src="/lovable-uploads/ad4de68b-6b79-4043-8600-905082164ac5.png"
+      <div className="relative h-[35vh] w-full">
+        <img
+          src="/images/jscover.jpeg"
           alt="Event Banner"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30" />
+        <div className="absolute inset-0 flex flex-col justify-center h-full text-white text-4xl md:text-[60px] md:leading-[65px] font-semibold">
+          <div className="ml-8 mr-24 md:ml-32  md:mr-0">
+            <div className="">
+              Accelerate your growth.
+            </div>
+            <div className="">
+              10X your fortune.
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto space-y-12">

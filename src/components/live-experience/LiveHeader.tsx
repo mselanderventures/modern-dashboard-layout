@@ -31,7 +31,7 @@ export const LiveHeader = ({ businessDetails }: LiveHeaderProps) => {
 
         {businessDetails && (
           <div className="border-t pt-8">
-            <h2 className="text-xl font-semibold text-gray-800 mb-6">
+            <h2 className="text-xl font-semibold text-gray-800">
               {businessDetails.name}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
