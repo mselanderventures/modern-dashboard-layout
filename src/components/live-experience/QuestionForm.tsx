@@ -123,7 +123,7 @@ export const QuestionForm = ({
   return (
     <div className="flex-1 max-w-2xl">
       <div 
-        className={`space-y-4 transition-all duration-300 ${
+        className={`space-y-4 transition-all duration-1000 ${
           isVisible 
             ? "opacity-100 translate-x-0" 
             : "opacity-0 -translate-x-4"
@@ -175,17 +175,7 @@ export const QuestionForm = ({
               <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
           )}
-          {currentQuestion.id === 2 && (
-            <Button
-              onClick={toggleMessage}
-              variant="outline"
-              className="w-full flex items-center gap-2"
-            >
-              <MessageCircle className="h-4 w-4" />
-              DEMO: Message from Jeremy
-            </Button>
-          )}
-          {showMessage && (
+          {currentQuestion.id === 2  && (
             <div 
               className={`bg-[#F1F0FB] border border-gray-200 rounded-lg p-6 transition-all duration-300 ${
                 showMessage ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"

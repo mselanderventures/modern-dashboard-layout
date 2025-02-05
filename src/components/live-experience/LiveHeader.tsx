@@ -18,7 +18,7 @@ export const LiveHeader = ({ businessDetails }: LiveHeaderProps) => {
   return (
     <div className="bg-white border-b">
       <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-        <div className="mb-12">
+        <div className="mb-4">
           <h1 className="text-4xl font-bold text-gray-900 tracking-tight">
             Founder's Fortune Academy by Jeremy Schwartz
           </h1>
@@ -33,7 +33,7 @@ export const LiveHeader = ({ businessDetails }: LiveHeaderProps) => {
         </div>
 
         {businessDetails && (
-          <div className="border-t pt-8">
+          <div className="border-t pt-4">
             <div className="flex flex-col space-y-4">
               <div className="flex items-center justify-between">
                 <div>

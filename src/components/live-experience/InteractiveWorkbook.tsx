@@ -36,7 +36,7 @@ export const InteractiveWorkbook = ({
 
   return (
     <div className="max-w-7xl mx-auto ">
-      <div className="px-4 py-12 sm:px-0 lg:px-8 bg-gray-50 mt-8 rounded-t-xl animate-[fade-in_0.5s_ease-out,slide-in-bottom_0.5s_ease-out] border m-8">
+      <div className="px-4 py-12 sm:px-0 lg:px-12 bg-gray-50 mt-8 rounded-xl animate-[fade-in_0.5s_ease-out,slide-in-bottom_0.5s_ease-out] m-8 bg-white shadow-lg">
 
 
         <h2 className="text-2xl font-bold text-gray-900 mb-8">Interactive Workbook</h2>

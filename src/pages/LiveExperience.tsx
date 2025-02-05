@@ -24,7 +24,7 @@ interface BusinessDetails {
 const initialQuestions: Question[] = [
   {
     id: 1,
-    text: "What are some \"I Wish\" statements related to the number of customers that you have?",
+    text: "An \"I Wish\" statement is a statement that describes an outcome in the business that you would like to be true but is not true right now. What are some \"I Wish\" statements related to the number of customers that you have?",
     answer: "",
     isCompleted: false,
     followUpAnswer: "",
@@ -32,7 +32,7 @@ const initialQuestions: Question[] = [
   },
   {
     id: 2,
-    text: "What are some \"I wish\" statements related to your P&L statement?",
+    text: "An \"I Wish\" statement is a statement that describes an outcome in the business that you would like to be true but is not true right now.  What are some \"I wish\" statements related to your P&L statement?",
     answer: "",
     isCompleted: false,
     followUpAnswer: "",
@@ -41,7 +41,7 @@ const initialQuestions: Question[] = [
   },
   {
     id: 3,
-    text: "Describe your ideal customer in as much detail as possible.",
+    text: "An \"I Wish\" statement is a statement that describes an outcome in the business that you would like to be true but is not true right now.  Describe your ideal customer in as much detail as possible.",
     answer: "",
     isCompleted: false,
     followUpAnswer: "",
