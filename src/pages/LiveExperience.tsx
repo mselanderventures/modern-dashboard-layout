@@ -1,5 +1,4 @@
 import { ActivationForm } from "@/components/live-experience/ActivationForm";
-import { BusinessForm } from "@/components/live-experience/BusinessForm";
 import { LiveHeader } from "@/components/live-experience/LiveHeader";
 import { InteractiveWorkbook } from "@/components/live-experience/InteractiveWorkbook";
 import { useEffect, useState } from "react";
@@ -50,13 +49,18 @@ const initialQuestions: Question[] = [
   },
 ];
 
+const defaultBusinessDetails: BusinessDetails = {
+  name: "Selander Consulting Group",
+  customers: 15,
+  revenue: 250000,
+  grossMargin: 15,
+};
+
 const LiveExperience = () => {
   const [isUnlocked, setIsUnlocked] = useState(false);
-  const [hasEnteredBusiness, setHasEnteredBusiness] = useState(false);
   const [questions, setQuestions] = useState<Question[]>(initialQuestions);
   const [currentQuestionId, setCurrentQuestionId] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [businessDetails, setBusinessDetails] = useState<BusinessDetails | null>(null);
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
@@ -98,11 +102,6 @@ const LiveExperience = () => {
     }
   };
 
-  const handleBusinessSubmit = (details: BusinessDetails) => {
-    setBusinessDetails(details);
-    setHasEnteredBusiness(true);
-  };
-
   const handleMessageClick = () => {
     setQuestions(questions.map(q =>
       q.id === currentQuestionId ? { ...q, hasMessage: !q.hasMessage } : q
@@ -113,13 +112,9 @@ const LiveExperience = () => {
     return <ActivationForm onUnlock={() => setIsUnlocked(true)} />;
   }
 
-  if (!hasEnteredBusiness) {
-    return <BusinessForm onSubmit={handleBusinessSubmit} />;
-  }
-
   return (
     <div className="min-h-screen bg-gray-50">
-      <LiveHeader businessDetails={businessDetails} />
+      <LiveHeader businessDetails={defaultBusinessDetails} />
       <InteractiveWorkbook
         questions={questions}
         currentQuestionId={currentQuestionId}
