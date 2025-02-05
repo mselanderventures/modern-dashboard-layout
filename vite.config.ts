@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => ({
     mode === 'development' &&
     componentTagger(),
   ].filter(Boolean),
-  base: '/modern-dashboard-layout/',
+  base: '/modern-dashboard-layout',
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
