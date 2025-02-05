@@ -52,12 +52,10 @@ export const EventCard = ({
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20" />
         </div>
       ) : (
-        <div className={`h-32 ${isVirtual
-            ? 'bg-gradient-to-br from-blue-500/10 to-purple-500/10'
-            : 'bg-gradient-to-br from-purple-500/10 to-blue-500/10'
-          }`}>
-          <div className="absolute inset-0 bg-white/40 backdrop-blur-sm" />
-        </div>
+        <div className={`h-32 relative ${isVirtual
+          ? 'bg-gradient-to-br from-blue-500/10 to-purple-500/10'
+          : 'bg-gradient-to-br from-purple-500/10 to-blue-500/10'
+          }`} />
       )}
       <CardHeader className="relative pb-2">
         <div className="flex items-center gap-2">
